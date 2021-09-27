@@ -1,0 +1,18 @@
+#!/usr/bin/python
+import socket, json
+import paho.mqtt.publish as mqtt
+from netifaces import interfaces, ifaddresses, AF_INET
+
+payload = {}
+hostname = socket.gethostname()
+for ifaceName in interfaces():
+    addresses = [i['addr'] for i in ifaddresses(ifaceName).setdefault(AF_INET, [])]
+    if ifaceName == "lo" or len(addresses) < 1:
+        continue
+
+    payload[ifaceName] = addresses
+
+try:
+    mqtt.single("ip/%s" % hostname, json.dumps(payload), qos=2, retain=True, hostname="mqttstage.prusa")
+except Exception:
+    pass

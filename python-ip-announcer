@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import socket, json
 import paho.mqtt.publish as mqtt
 from netifaces import interfaces, ifaddresses, AF_INET

@@ -12,7 +12,7 @@ then
 fi
 
 apt update
-apt install python python-paho-mqtt python-netifaces --yes
+apt install python3 python3-paho-mqtt python3-netifaces --yes
 
 cp $WORKDIR/$SERVICE $TARGET
 chmod +x $TARGET
@@ -27,7 +27,7 @@ After=network-online.target
 Type=simple
 Restart=never
 StartLimitIntervalSec=5
-ExecStart=$(which python) $TARGET
+ExecStart=$(which python3) $TARGET
 
 [Install]
 WantedBy=multi-user.target
